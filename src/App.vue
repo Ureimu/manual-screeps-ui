@@ -1,17 +1,26 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <p>data: {{ JSON.stringify(screepsData) }}</p>
+    <Container :screepsData="screepsData" />
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+import Container from "./components/Container.vue";
 
-export default {
-    name: "App",
+import { ScreepsData } from "./renderData/type";
+
+@Options({
     components: {
-        HelloWorld
+        Container
     }
-};
+})
+export default class MainApp extends Vue {
+    data() {
+        return {
+            screepsData: null as ScreepsData | null
+        };
+    }
+}
 </script>
 
 <style>
