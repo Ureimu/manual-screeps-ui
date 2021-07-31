@@ -26,7 +26,7 @@ npm run deploy
 ```
 or run code in deploy.sh step by step.
 
-Remember to get ssh key before use this.
+Remember to get ssh key before using this.
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
