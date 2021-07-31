@@ -1,19 +1,19 @@
 <template>
     <el-container>
-        <el-header height="40px" style="font-size: 20px">
+        <el-header height="60px" style="font-size: 28px">
             <p>{{ msg }}</p>
         </el-header>
         <el-main>
             <el-progress
                 type="circle"
                 size="medium"
-                stroke-width="10"
+                :stroke-width="Number(13)"
+                :width="Number(128)"
                 :title="msg"
                 :percentage="levelData ? (levelData.progress / levelData.progressTotal) * 100 : 0"
             >
-                <template #default="{ percentage }">
-                    <span class="percentage-label">{{ levelData.level }}:</span>
-                    <span class="percentage-value">{{ percentage }}%</span>
+                <template #default="{  }">
+                    <span class="percentage-label">{{ levelData?.level }}</span>
                 </template>
             </el-progress></el-main
         >
@@ -23,7 +23,7 @@
 <script lang="ts">
 import { LevelData } from "@/renderData/type";
 import { Options, Vue } from "vue-class-component";
-
+//<span class="percentage-value">{{ percentage }}%</span>
 @Options({
     props: {
         msg: String,
@@ -44,6 +44,6 @@ export default class DashboardProgressBar extends Vue {
     font-size: 24px;
 }
 .percentage-label {
-    font-size: 24px;
+    font-size: 40px;
 }
 </style>

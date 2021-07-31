@@ -1,5 +1,4 @@
 <template>
-    <p>data: {{ JSON.stringify(screepsData) }}</p>
     <Container :screepsData="screepsData" />
 </template>
 
@@ -21,6 +20,7 @@ export default class MainApp extends Vue {
         };
     }
 }
+//<p>data: {{ JSON.stringify(screepsData) }}</p>
 </script>
 
 <style>

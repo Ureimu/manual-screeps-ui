@@ -1,7 +1,12 @@
 export interface ScreepsData {
+    timeData: {
+        tick: number;
+        time: number;
+    };
     userData: {
         gcl: LevelData;
         gpl: LevelData;
+        name: string;
     };
     shardData: {
         shardName: string;
@@ -19,10 +24,15 @@ export interface LevelData {
 
 export interface RoomData {
     controller: {
-        progressSpeed: number;
-        ticksToUpgrade: number;
+        progressSpeed: string;
+        ticksToUpgrade: string;
     } & LevelData;
     creep: {
         num: number;
     };
+    projectDiagram: {
+        maintenance: string;
+        outwardsSource: { [roomName: string]: string };
+    };
+    name: string;
 }
