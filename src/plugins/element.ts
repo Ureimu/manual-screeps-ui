@@ -13,13 +13,18 @@ import {
     ElMenu,
     ElMenuItem,
     ElMenuItemGroup,
+    ElPopover,
     ElProgress,
     ElRow,
     ElScrollbar,
     ElSelect,
+    ElSpace,
     ElSubmenu,
+    ElTable,
+    ElTableColumn,
     ElTabPane,
-    ElTabs
+    ElTabs,
+    ElTag
 } from "element-plus";
 import lang from "element-plus/lib/locale/lang/zh-cn";
 import locale from "element-plus/lib/locale";
@@ -47,7 +52,12 @@ export default (app: any) => {
         ElTabs,
         ElTabPane,
         ElDialog,
-        ElImage
+        ElImage,
+        ElTable,
+        ElTableColumn,
+        ElPopover,
+        ElTag,
+        ElSpace
     ];
     elementList.forEach(ele => app.use(ele));
 };

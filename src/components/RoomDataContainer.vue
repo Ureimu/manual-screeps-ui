@@ -28,15 +28,34 @@
                         ></el-col>
                         <el-col :span="15"><div class="grid-content bg-purple"></div></el-col>
                     </el-row>
+                    <el-row> </el-row>
 
                     <el-tabs align="left" style="height: 80px;">
-                        <el-tab-pane label="房间信息"
-                            ><MermaidDialog
-                                :mermaidCode="decode(room.projectDiagram.maintenance)"
-                                :id="room.name + `maintenance`"
-                                :msg="`房间运维`"
-                        /></el-tab-pane>
-                        <el-tab-pane label="外矿信息">暂无</el-tab-pane>
+                        <el-tab-pane label="房间信息">
+                            <el-space wrap>
+                                <MermaidDialog
+                                    :mermaidCode="decode(room.projectDiagram.maintenance)"
+                                    :id="room.name + `maintenance`"
+                                    :msg="`房间运维`"
+                                />
+                                <ListOfCreepDialog
+                                    :spawnPoolData="room.spawnPool"
+                                    :msg="`${room.name} spawnPool Data`"
+                                    :title="`spawnPool`"
+                                    :creepBodyConfig="screepsData?.globalData.creepBodyConfig"
+                                    :creepGroups="screepsData?.globalData.creepGroups"
+                                />
+                            </el-space>
+                        </el-tab-pane>
+                        <el-tab-pane label="外矿信息">
+                            <el-space wrap v-for="sourceData in room.projectDiagram.outwardsSource" :key="sourceData">
+                                <MermaidDialog
+                                    :mermaidCode="decode(sourceData.diagram)"
+                                    :id="`${sourceData.name}`"
+                                    :msg="`${sourceData.name}`"
+                                />
+                            </el-space>
+                        </el-tab-pane>
                     </el-tabs>
                 </el-main>
             </el-container>
@@ -49,6 +68,7 @@ import { ScreepsData } from "@/renderData/type";
 import { Base64 } from "js-base64";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
+import ListOfCreepDialog from "./ListOfCreepDialog.vue";
 import MermaidDialog from "./MermaidDialog.vue";
 import TextContainer from "./TextContainer.vue";
 
@@ -56,7 +76,8 @@ import TextContainer from "./TextContainer.vue";
     components: {
         DashboardProgressBar,
         TextContainer,
-        MermaidDialog
+        MermaidDialog,
+        ListOfCreepDialog
     },
     props: {
         screepsData: Object

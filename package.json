@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "echarts": "^5.1.2",
     "element-plus": "^1.0.2-beta.28",
     "js-base64": "^3.6.0",
     "mermaid": "^8.8.3",
+    "screeps-calculator": "^0.1.13",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-property-decorator": "^9.1.2"

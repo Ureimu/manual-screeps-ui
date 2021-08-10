@@ -26,7 +26,8 @@
                             :msg="[
                                 `用户名称:  ${screepsData?.userData.name}`,
                                 `shard名称: ${screepsData?.shardData.shardName}`,
-                                `数据生成时间: ${screepsData?.timeData.tick}`
+                                `数据生成时间: ${screepsData?.timeData.tick}`,
+                                `对应现实时间: ${getTime(screepsData?.timeData.time)}`
                             ]"
                             :title="`数据`"
                         />
@@ -57,6 +58,18 @@ import TextContainer from "./TextContainer.vue";
 })
 export default class UserDataContainer extends Vue {
     screepsData!: ScreepsData;
+    getTime(time: number) {
+        const date = new Date(time);
+        const dateData = {
+            y: date.getFullYear(),
+            m: date.getMonth(),
+            d: date.getDay(),
+            h: date.getHours(),
+            min: date.getMinutes(),
+            s: date.getSeconds()
+        };
+        return `${dateData.y}-${dateData.m}-${dateData.d},${dateData.h}:${dateData.m}:${dateData.s}`;
+    }
 }
 </script>
 
