@@ -219,9 +219,9 @@ export const testData: ScreepsData = {
     roomData: {
         E34S21: {
             controller: {
-                level: 6,
-                progress: 96,
-                progressTotal: 100,
+                level: 8,
+                progress: 1,
+                progressTotal: 1,
                 progressSpeed: "12.42",
                 ticksToUpgrade: "485"
             },

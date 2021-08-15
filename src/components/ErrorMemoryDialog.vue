@@ -9,7 +9,7 @@
                     <span style="margin-left: 5px">{{ scope.row.tick }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="errorShortMessage" label="错误信息" width="330">
+            <el-table-column prop="errorShortMessage" label="错误信息" width="500">
                 <template #default="scope">
                     <span style="margin-left: 5px">{{ scope.row.messageList[0].short }}</span>
                 </template>

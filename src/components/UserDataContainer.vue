@@ -10,6 +10,7 @@
                         <DashboardProgressBar
                             :msg="`gcl`"
                             :levelData="screepsData?.userData.gcl ? screepsData.userData.gcl : null"
+                            :isFull="false"
                         />
                     </div>
                 </el-col>
@@ -18,6 +19,23 @@
                         <DashboardProgressBar
                             :msg="`gpl`"
                             :levelData="screepsData?.userData.gpl ? screepsData.userData.gpl : null"
+                            :isFull="false"
+                        /></div
+                ></el-col>
+                <el-col :span="3"
+                    ><div class="grid-content bg-white">
+                        <DashboardProgressBar
+                            :msg="`errMem`"
+                            :levelData="{
+                                level: screepsData?.userData.error.cache
+                                    ? Object.keys(screepsData?.userData.error.cache).length
+                                    : null,
+                                progress: screepsData?.userData.error
+                                    ? JSON.stringify(screepsData?.userData.error).length
+                                    : null,
+                                progressTotal: 1.024e5
+                            }"
+                            :isFull="screepsData?.userData.error.isFull"
                         /></div
                 ></el-col>
                 <el-col :span="6">
@@ -33,7 +51,7 @@
                         />
                     </div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="9">
                     <div class="grid-content bg-purple"></div>
                 </el-col>
             </el-row>

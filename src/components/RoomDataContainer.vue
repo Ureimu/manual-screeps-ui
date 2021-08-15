@@ -11,7 +11,12 @@
                             ><div class="grid-content bg-white">
                                 <DashboardProgressBar
                                     :msg="`rcl`"
-                                    :levelData="room.controller ? room.controller : null"
+                                    :levelData="
+                                        room.controller?.level === 8
+                                            ? { progress: 1, progressTotal: 1, level: 8 }
+                                            : room.controller ?? null
+                                    "
+                                    :isFull="room.controller?.level === 8"
                                 />
                             </div>
                         </el-col>

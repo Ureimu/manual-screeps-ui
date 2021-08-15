@@ -7,6 +7,7 @@
             <el-progress
                 type="circle"
                 size="medium"
+                :color="isFull ? `#F56C6C` : `#409EFF`"
                 :stroke-width="Number(13)"
                 :width="Number(128)"
                 :title="msg"
@@ -27,12 +28,14 @@ import { Options, Vue } from "vue-class-component";
 @Options({
     props: {
         msg: String,
-        levelData: Object
+        levelData: Object,
+        isFull: Boolean
     }
 })
 export default class DashboardProgressBar extends Vue {
     msg!: string;
     levelData!: LevelData;
+    isFull!: boolean;
 }
 </script>
 
