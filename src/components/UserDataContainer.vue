@@ -37,6 +37,7 @@
                     <div class="grid-content bg-purple"></div>
                 </el-col>
             </el-row>
+            <ErrorMemoryDialog title="报错信息" :errorMemory="screepsData?.userData.error" />
         </el-main>
     </el-container>
 </template>
@@ -45,6 +46,7 @@
 import { ScreepsData } from "@/renderData/type";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
+import ErrorMemoryDialog from "./ErrorMemoryDialog.vue";
 import TextContainer from "./TextContainer.vue";
 
 @Options({
@@ -53,7 +55,8 @@ import TextContainer from "./TextContainer.vue";
     },
     components: {
         DashboardProgressBar,
-        TextContainer
+        TextContainer,
+        ErrorMemoryDialog
     }
 })
 export default class UserDataContainer extends Vue {

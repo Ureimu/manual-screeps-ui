@@ -17,7 +17,88 @@ export const testData: ScreepsData = {
             progress: 68,
             progressTotal: 100
         },
-        name: "Ureium"
+        name: "Ureium",
+        error: {
+            cache: {
+                "228000": {
+                    messageList: [
+                        {
+                            short: "Error: test Error 1",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        },
+                        {
+                            short: "Error: test Error 2",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        },
+                        {
+                            short: "Error: test Error 3",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16) Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        },
+                        {
+                            short: "Error: test Error 4",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        }
+                    ],
+                    tick: 228000
+                },
+                "228010": {
+                    messageList: [
+                        {
+                            short: "Error: test Error",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        }
+                    ],
+                    tick: 228010
+                },
+                "228030": {
+                    messageList: [
+                        {
+                            short: "Error: test Error",
+                            full: [
+                                "Error: test Error",
+                                "    at src/main.ts:11:40",
+                                "    at wrap  (src/utils/profiler/wrap/loop.ts:115:11)",
+                                "    at ErrorMapper.wrapLoop  (src/main.ts:10:4)",
+                                "    at Object.loop  (src/utils/ErrorMapper.ts:118:16)"
+                            ]
+                        }
+                    ],
+                    tick: 228030
+                }
+            },
+            isFull: false,
+            uncaughtErrorNum: 0
+        }
     },
     globalData: {
         creepGroups: {

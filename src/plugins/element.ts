@@ -2,6 +2,7 @@ import {
     ElAside,
     ElBacktop,
     ElButton,
+    ElCard,
     ElCol,
     ElCollapse,
     ElCollapseItem,
@@ -57,7 +58,8 @@ export default (app: any) => {
         ElTableColumn,
         ElPopover,
         ElTag,
-        ElSpace
+        ElSpace,
+        ElCard
     ];
     elementList.forEach(ele => app.use(ele));
 };

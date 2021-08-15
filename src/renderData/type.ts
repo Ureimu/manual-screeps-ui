@@ -7,6 +7,7 @@ export interface ScreepsData {
         gcl: LevelData;
         gpl: LevelData;
         name: string;
+        error: ErrorSegmentMemory;
     };
     shardData: {
         shardName: string;
@@ -46,6 +47,18 @@ export interface LevelData {
     level: number;
     progress: number;
     progressTotal: number;
+}
+export interface ErrorSegmentMemory {
+    cache: ErrorCache;
+    isFull: boolean;
+    uncaughtErrorNum: number;
+}
+export interface ErrorCache {
+    [time: number]: SingleErrorCache;
+}
+export interface SingleErrorCache {
+    messageList: { short: string; full: string[] }[];
+    tick: number;
 }
 
 export interface SpawnPoolData {
