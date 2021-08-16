@@ -2,9 +2,14 @@
     <el-button type="primary" align="left" @click="dialogTableVisible = true">{{ title }}</el-button>
 
     <el-dialog title="Error Memory Dialog" :fullscreen="true" v-model="dialogTableVisible">
-        <el-table :data="rowData" style="width: 100%" height="750">
+        <el-table
+            :default-sort="{ prop: 'tick', order: 'descending' }"
+            :data="rowData"
+            style="width: 100%"
+            height="750"
+        >
             <el-table-column type="index" width="50"> </el-table-column>
-            <el-table-column prop="tick" label="时间" width="160">
+            <el-table-column prop="tick" label="时间" width="160" sortable>
                 <template #default="scope">
                     <span style="margin-left: 5px">{{ scope.row.tick }}</span>
                 </template>
