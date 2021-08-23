@@ -1,8 +1,95 @@
 import { ScreepsData } from "@/renderData/type";
+import _ from "lodash";
+const runEpoch = (num: number, f: () => unknown) => {
+    for (let i = 0; i < num; i++) {
+        f();
+    }
+};
+const getRandomList = (min: number, max: number, num: number) => {
+    const numList: number[] = [];
+    const interval = max - min;
+    if (interval !== 0) {
+        runEpoch(num, () => {
+            numList.push(Math.round(Math.random() * interval + min));
+        });
+    } else {
+        runEpoch(num, () => {
+            numList.push(min);
+        });
+    }
 
+    return numList;
+};
+const getRandomSumList = (min: number, max: number, num: number, base: number = 0) => {
+    return getRandomList(min, max, num).map((a, index, array) => array.slice(0, index + 1).reduce(_.add, base));
+};
+const GameTime = 12042145;
+const length = 1000;
+const controllerProgressData1 = getRandomSumList(0, 2000, length / 2, 5.9e6);
+const controllerProgressData2 = getRandomSumList(
+    0,
+    7000,
+    length / 2,
+    controllerProgressData1[controllerProgressData1.length - 1]
+).concat(getRandomSumList(0, 4000, length / 2, 5.9e6));
+const controllerProgressData = controllerProgressData1.concat(controllerProgressData2);
 export const testData: ScreepsData = {
+    timeSeriesData: {
+        userData: {
+            credits: {
+                data: getRandomSumList(-11000, 10000, length, 1e6).map(a => 1e3 * a),
+                depth: 21,
+                type: "any"
+            },
+            pixels: {
+                data: getRandomSumList(0, 100, length),
+                depth: 21,
+                type: "any"
+            }
+        },
+        roomData: {
+            E34S21: {
+                controllerProgress: {
+                    data: getRandomSumList(0, 0, length, 10.9e6),
+                    depth: 21,
+                    type: "any"
+                },
+                storageData: {
+                    energy: {
+                        data: getRandomSumList(-1000, 1000, length, 6e5),
+                        depth: 21,
+                        type: "any"
+                    }
+                }
+            },
+            E35S21: {
+                controllerProgress: {
+                    data: controllerProgressData,
+                    depth: 21,
+                    type: "any"
+                },
+                storageData: {
+                    energy: {
+                        data: getRandomSumList(-4500, 4000, length, 6e5),
+                        depth: 21,
+                        type: "any"
+                    }
+                }
+            }
+        },
+        timeStamp: {
+            data: getRandomSumList(1000 * 60 * 15, 1000 * 60 * 15, length, Date.now() - 1000 * 60 * 15 * length),
+            type: "time",
+            depth: 41
+        },
+        gameTime: {
+            data: getRandomSumList(300, 300, length, GameTime - 300 * length),
+            type: "time",
+            depth: 41
+        }
+    },
     timeData: {
-        tick: 12042145,
+        tick: GameTime,
         time: Date.now()
     },
     shardData: { shardName: "testShard" },
@@ -382,8 +469,8 @@ export const testData: ScreepsData = {
         E35S21: {
             controller: {
                 level: 7,
-                progress: 10,
-                progressTotal: 100,
+                progress: controllerProgressData[controllerProgressData.length - 1],
+                progressTotal: 10.9e6,
                 progressSpeed: "26.02",
                 ticksToUpgrade: "88412"
             },

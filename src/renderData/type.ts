@@ -1,4 +1,5 @@
 export interface ScreepsData {
+    timeSeriesData: FrameStats<number[]> & { timeStamp: SingleData<number[]>; gameTime: SingleData<number[]> };
     timeData: {
         tick: number;
         time: number;
@@ -99,5 +100,33 @@ export interface RoomData {
     name: string;
     spawnPool: {
         [creepName: string]: SpawnPoolData;
+    };
+}
+
+export type SingleTypedTreeDataNode<T> = T | SingleTypedTreeDataRecord<T>;
+
+// 下面定义了一个树类型，需要借用接口的特性，参见https://stackoverflow.com/questions/46216048
+// 除非你有更好的方案，否则不要去掉下面的eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface SingleTypedTreeDataRecord<T> extends Record<string, SingleTypedTreeDataNode<T>> {}
+export type SingleTypedTreeData<T> = Record<string, SingleTypedTreeDataNode<T>> & { timeStamp?: T; gameTime?: T };
+export interface SingleData<T extends number[] | string | number> {
+    data: T;
+    type: string;
+    depth: number;
+}
+
+export interface FrameStats<T extends string | number | number[]> {
+    userData: {
+        credits: SingleData<T>;
+        pixels: SingleData<T>;
+    };
+    roomData: {
+        [name: string]: {
+            controllerProgress: SingleData<T>;
+            storageData: {
+                energy: SingleData<T>;
+            };
+        };
     };
 }

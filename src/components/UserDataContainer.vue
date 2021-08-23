@@ -4,7 +4,7 @@
             <p>user data</p>
         </el-header>
         <el-main>
-            <el-row :gutter="30">
+            <el-row>
                 <el-col :span="3"
                     ><div class="grid-content bg-white">
                         <DashboardProgressBar
@@ -52,8 +52,32 @@
                     </div>
                 </el-col>
                 <el-col :span="9">
-                    <div class="grid-content bg-purple"></div>
+                    <div class="grid-content bg-white"></div>
                 </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <div class="grid-content bg-white">
+                        <FlexibleLineChart
+                            :id="`credits`"
+                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                            :yData="screepsData?.timeSeriesData.userData.credits.data"
+                            :visable="!!screepsData"
+                            :name="`credits`"
+                        /></div
+                ></el-col>
+                <el-col :span="8">
+                    <div class="grid-content bg-white">
+                        <FlexibleLineChart
+                            :id="`pixels`"
+                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                            :yData="screepsData?.timeSeriesData.userData.pixels.data"
+                            :visable="!!screepsData"
+                            :name="`pixels`"
+                        /></div
+                ></el-col>
             </el-row>
             <ErrorMemoryDialog title="报错信息" :errorMemory="screepsData?.userData.error" />
         </el-main>
@@ -64,6 +88,7 @@
 import { ScreepsData } from "@/renderData/type";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
+import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
 import ErrorMemoryDialog from "./ErrorMemoryDialog.vue";
 import TextContainer from "./TextContainer.vue";
 
@@ -74,22 +99,32 @@ import TextContainer from "./TextContainer.vue";
     components: {
         DashboardProgressBar,
         TextContainer,
-        ErrorMemoryDialog
+        ErrorMemoryDialog,
+        FlexibleLineChart
     }
 })
 export default class UserDataContainer extends Vue {
     screepsData!: ScreepsData;
-    getTime(time: number) {
+    getTime(time: number): string {
+        const addZero = (time: number): string => {
+            if (time < 10) {
+                return `0${time}`;
+            } else {
+                return `${time}`;
+            }
+        };
         const date = new Date(time);
         const dateData = {
             y: date.getFullYear(),
-            m: date.getMonth(),
-            d: date.getDay(),
+            m: date.getMonth() + 1,
+            d: date.getDate(),
             h: date.getHours(),
             min: date.getMinutes(),
             s: date.getSeconds()
         };
-        return `${dateData.y}-${dateData.m}-${dateData.d},${dateData.h}:${dateData.m}:${dateData.s}`;
+        return `${dateData.y}-${addZero(dateData.m)}-${addZero(dateData.d)},${addZero(dateData.h)}:${addZero(
+            dateData.min
+        )}:${addZero(dateData.s)}`;
     }
 }
 </script>

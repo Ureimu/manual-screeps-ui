@@ -33,7 +33,32 @@
                         ></el-col>
                         <el-col :span="15"><div class="grid-content bg-purple"></div></el-col>
                     </el-row>
-                    <el-row> </el-row>
+                    <el-row>
+                        <el-col :span="8">
+                            <div class="grid-content bg-white">
+                                <FlexibleLineChart
+                                    :id="`${room.name}controllerProgress`"
+                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
+                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                                    :yData="screepsData.timeSeriesData.roomData[room.name].controllerProgress.data"
+                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :name="`${room.name}controllerProgress`"
+                                />
+                            </div>
+                        </el-col>
+                        <el-col :span="8">
+                            <div class="grid-content bg-white">
+                                <FlexibleLineChart
+                                    :id="`${room.name}storageEnergy`"
+                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
+                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                                    :yData="screepsData.timeSeriesData.roomData[room.name].storageData.energy.data"
+                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :name="`${room.name}storageEnergy`"
+                                />
+                            </div>
+                        </el-col>
+                    </el-row>
 
                     <el-tabs align="left" style="height: 80px;">
                         <el-tab-pane label="房间信息">
@@ -73,6 +98,7 @@ import { ScreepsData } from "@/renderData/type";
 import { Base64 } from "js-base64";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
+import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
 import ListOfCreepDialog from "./ListOfCreepDialog.vue";
 import MermaidDialog from "./MermaidDialog.vue";
 import TextContainer from "./TextContainer.vue";
@@ -82,7 +108,8 @@ import TextContainer from "./TextContainer.vue";
         DashboardProgressBar,
         TextContainer,
         MermaidDialog,
-        ListOfCreepDialog
+        ListOfCreepDialog,
+        FlexibleLineChart
     },
     props: {
         screepsData: Object
