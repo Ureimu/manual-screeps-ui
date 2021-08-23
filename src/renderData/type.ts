@@ -120,6 +120,8 @@ export interface FrameStats<T extends string | number | number[]> {
     userData: {
         credits: SingleData<T>;
         pixels: SingleData<T>;
+        gclProgress: SingleData<T>;
+        gplProgress: SingleData<T>;
     };
     roomData: {
         [name: string]: {

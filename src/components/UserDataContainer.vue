@@ -78,6 +78,31 @@
                             :name="`pixels`"
                         /></div
                 ></el-col>
+                <el-col :span="8">
+                    <div class="grid-content bg-white">
+                        <FlexibleLineChart
+                            :id="`gclProgress`"
+                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                            :yData="screepsData?.timeSeriesData.userData.gclProgress.data"
+                            :visable="!!screepsData"
+                            :name="`gclProgress`"
+                        /></div
+                ></el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <div class="grid-content bg-white">
+                        <FlexibleLineChart
+                            :id="`gplProgress`"
+                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                            :yData="screepsData?.timeSeriesData.userData.gplProgress.data"
+                            :visable="!!screepsData"
+                            :name="`gplProgress`"
+                        />
+                    </div>
+                </el-col>
             </el-row>
             <ErrorMemoryDialog title="报错信息" :errorMemory="screepsData?.userData.error" />
         </el-main>
