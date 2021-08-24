@@ -95,7 +95,7 @@ export default class FlexibleLineChart extends Vue {
             tooltip: {
                 trigger: "axis",
                 position: function(pt: number[]) {
-                    return [pt[0], "10%"];
+                    return [pt[0], "-20%"];
                 },
                 formatter: (params:{ data: [timeStamp:number, value:number]; dataIndex: number;seriesName:string;color:string ;marker:string}[]) => {
                     console.log(params)
