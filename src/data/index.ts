@@ -45,6 +45,16 @@ export const testData: ScreepsData = {
                 data: getRandomSumList(0, 100, length),
                 depth: 21,
                 type: "any"
+            },
+            gclProgress: {
+                data: getRandomSumList(60, 70, length, 1e4),
+                depth: 41,
+                type: "any"
+            },
+            gplProgress: {
+                data: getRandomSumList(60, 70, length, 1e4),
+                depth: 41,
+                type: "any"
             }
         },
         roomData: {
