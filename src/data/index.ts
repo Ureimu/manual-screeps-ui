@@ -70,6 +70,28 @@ export const testData: ScreepsData = {
                         depth: 21,
                         type: "any"
                     }
+                },
+                outwardsSourceEnergy: {
+                    E32S21: {
+                        data: getRandomSumList(-10000, 10000, length, 6e5),
+                        depth: 21,
+                        type: "any"
+                    },
+                    E31S21: {
+                        data: getRandomSumList(-10000, 10000, length, 7e5),
+                        depth: 21,
+                        type: "any"
+                    },
+                    E35S21: {
+                        data: getRandomSumList(-10000, 10000, length, 5e5),
+                        depth: 21,
+                        type: "any"
+                    },
+                    E35S22: {
+                        data: getRandomSumList(-10000, 10000, length, 4e5),
+                        depth: 21,
+                        type: "any"
+                    }
                 }
             },
             E35S21: {
@@ -81,6 +103,18 @@ export const testData: ScreepsData = {
                 storageData: {
                     energy: {
                         data: getRandomSumList(-4500, 4000, length, 6e5),
+                        depth: 21,
+                        type: "any"
+                    }
+                },
+                outwardsSourceEnergy: {
+                    E32S21: {
+                        data: getRandomSumList(-1000, 1000, length, 6e5),
+                        depth: 21,
+                        type: "any"
+                    },
+                    E31S21: {
+                        data: getRandomSumList(-1000, 1000, length, 6e5),
                         depth: 21,
                         type: "any"
                     }

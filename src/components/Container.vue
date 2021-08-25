@@ -1,6 +1,6 @@
 <template>
-    <el-container style="width:100%; height: 100%; border: 1px solid #eee">
-        <el-aside id="navBar" :class="{ isFixed: istabBar }">
+    <el-container style="width: 100%; height: 100%; border: 1px solid #eee">
+        <el-aside id="navBar" :class="{ isFixed: istabBar }" width="200px">
             <SideMenu :screepsData="screepsData" />
         </el-aside>
 
@@ -8,7 +8,7 @@
             <el-header height="80px" style="text-align: left; font-size: 16px">
                 <h1>stats</h1>
             </el-header>
-            <el-main><Layout :screepsData="screepsData"/></el-main>
+            <el-main><Layout :screepsData="screepsData" /></el-main>
         </el-container>
     </el-container>
 </template>

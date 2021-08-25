@@ -67,19 +67,19 @@
                         </el-col>
                         <el-col :span="8">
                             <div class="grid-content bg-white">
-                                <FlexibleLineChart
-                                    :id="`${room.name}storageEnergy`"
+                                <ComparableLineChart
+                                    :id="`${room.name}outwardsSourceEnergy`"
                                     :timeData="screepsData.timeSeriesData.timeStamp.data"
                                     :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                                    :yData="screepsData.timeSeriesData.roomData[room.name].storageData.energy.data"
+                                    :yDataList="screepsData.timeSeriesData.roomData[room.name].outwardsSourceEnergy"
                                     :visable="!!screepsData.timeSeriesData.roomData[room.name]"
-                                    :name="`${room.name}storageEnergy`"
+                                    :name="`${room.name}outwardsSourceEnergy`"
                                 />
                             </div>
                         </el-col>
                     </el-row>
 
-                    <el-tabs align="left" style="height: 80px;">
+                    <el-tabs align="left" style="height: 80px">
                         <el-tab-pane label="房间信息">
                             <el-space wrap>
                                 <MermaidDialog
@@ -117,6 +117,7 @@ import { ScreepsData } from "@/data/type";
 import { Base64 } from "js-base64";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
+import ComparableLineChart from "./echarts/ComparableLineChart.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
 import SunBrustResourceChart from "./echarts/SunBrustResourceChart.vue";
 import ListOfCreepDialog from "./ListOfCreepDialog.vue";
@@ -130,7 +131,8 @@ import TextContainer from "./TextContainer.vue";
         MermaidDialog,
         ListOfCreepDialog,
         FlexibleLineChart,
-        SunBrustResourceChart
+        SunBrustResourceChart,
+        ComparableLineChart
     },
     props: {
         screepsData: Object

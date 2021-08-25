@@ -134,6 +134,9 @@ export interface FrameStats<T extends string | number | number[]> {
             storageData: {
                 energy: SingleData<T>;
             };
+            outwardsSourceEnergy: {
+                [sourceName: string]: SingleData<T>;
+            };
         };
     };
 }
