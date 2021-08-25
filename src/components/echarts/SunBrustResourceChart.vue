@@ -67,7 +67,7 @@ export default class SunBrustResourceChart extends Vue {
                 sum += b[v];
             }
         }
-        store["empty"] = capacity - sum;
+        store["empty"] = (store["empty"] || 0) + capacity - sum;
         return store;
     }
     RES_TREE = {
