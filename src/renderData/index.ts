@@ -1,6 +1,6 @@
 import mermaid from "mermaid";
 import { App } from "vue";
-import { ScreepsData } from "./type";
+import { ScreepsData } from "../data/type";
 export function runRender(fullData: ScreepsData, app: App): void {
     console.log("start render");
 
@@ -14,7 +14,4 @@ export function runRender(fullData: ScreepsData, app: App): void {
     mermaid.initialize({
         startOnLoad: true
     });
-    console.log("render mermaid");
-
-    console.log("finish render");
 }

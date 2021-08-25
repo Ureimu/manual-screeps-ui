@@ -1,7 +1,9 @@
 <template>
     <el-container>
-        <el-header height="20px" style="text-align: left; font-size: 16px">
-            <p>user data</p>
+        <el-header height="50px" style="text-align: left; font-size: 16px">
+            <h2>
+                <a name="userData">User data</a>
+            </h2>
         </el-header>
         <el-main>
             <el-row>
@@ -110,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/renderData/type";
+import { ScreepsData } from "@/data/type";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";

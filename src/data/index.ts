@@ -1,4 +1,4 @@
-import { ScreepsData } from "@/renderData/type";
+import { ScreepsData } from "@/data/type";
 import _ from "lodash";
 const runEpoch = (num: number, f: () => unknown) => {
     for (let i = 0; i < num; i++) {
@@ -315,6 +315,16 @@ export const testData: ScreepsData = {
     },
     roomData: {
         E34S21: {
+            store: {
+                storage: {
+                    store: { energy: 10000, K: 1000, O: 2000, X: 1000, LH2O: 1000 },
+                    storeCapacity: 20000
+                },
+                terminal: {
+                    store: { energy: 10000, K: 1000, O: 2000, X: 1000, LH2O: 1000 },
+                    storeCapacity: 20000
+                }
+            },
             controller: {
                 level: 8,
                 progress: 1,
@@ -342,102 +352,6 @@ export const testData: ScreepsData = {
                     creepName: "W34N21h1",
                     creepBody: "harvester",
                     priority: 10,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21c0: {
-                    creepName: "W34N21c0",
-                    creepBody: "carrier",
-                    priority: 9,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21c1: {
-                    creepName: "W34N21c1",
-                    creepBody: "carrier",
-                    priority: 9,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21up0: {
-                    creepName: "W34N21up0",
-                    creepBody: "worker",
-                    priority: 8,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21up1: {
-                    creepName: "W34N21up1",
-                    creepBody: "worker",
-                    priority: 8,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21build0: {
-                    creepName: "W34N21build0",
-                    creepBody: "worker",
-                    priority: 7,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21build1: {
-                    creepName: "W34N21build1",
-                    creepBody: "worker",
-                    priority: 7,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21up2: {
-                    creepName: "W34N21up2",
-                    creepBody: "worker",
-                    priority: 5,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21h0t: {
-                    creepName: "W34N21h0t",
-                    creepBody: "harvester",
-                    priority: 10,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21h1t: {
-                    creepName: "W34N21h1t",
-                    creepBody: "harvester",
-                    priority: 10,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21c0t: {
-                    creepName: "W34N21c0t",
-                    creepBody: "carrier",
-                    priority: 9,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21c1t: {
-                    creepName: "W34N21c1t",
-                    creepBody: "carrier",
-                    priority: 9,
-                    readyCondition: "loop",
-                    state: "notReady",
-                    roomName: "W34N21"
-                },
-                W34N21up0t: {
-                    creepName: "W34N21up0t",
-                    creepBody: "worker",
-                    priority: 8,
                     readyCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
@@ -477,6 +391,16 @@ export const testData: ScreepsData = {
             }
         },
         E35S21: {
+            store: {
+                storage: {
+                    store: { energy: 10000, K: 1000, O: 2000, X: 1000, LH2O: 1000, U: 3e4, power: 5000 },
+                    storeCapacity: 200000
+                },
+                terminal: {
+                    store: { energy: 10000, K: 1000, O: 2000, X: 1000, LH2O: 1000, power: 5000 },
+                    storeCapacity: 200000
+                }
+            },
             controller: {
                 level: 7,
                 progress: controllerProgressData[controllerProgressData.length - 1],

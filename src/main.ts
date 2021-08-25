@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import MainApp from "./App.vue";
 import installElementPlus from "./plugins/element";
-import { ScreepsData } from "./renderData/type";
+import { ScreepsData } from "./data/type";
 import { Base64 } from "js-base64";
 import { runRender } from "./renderData";
 import { testData } from "./data";

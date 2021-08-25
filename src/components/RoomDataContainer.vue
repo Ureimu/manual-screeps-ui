@@ -1,9 +1,12 @@
 <template>
     <span v-if="screepsData?.roomData">
         <span v-for="room in screepsData?.roomData" :key="room">
+            <el-divider></el-divider>
             <el-container>
-                <el-header height="20px" style="text-align: left; font-size: 16px">
-                    <p>{{ room.name }}</p>
+                <el-header height="50px" style="text-align: left; font-size: 16px">
+                    <h2>
+                        <a :name="room.name">{{ room.name }}</a>
+                    </h2>
                 </el-header>
                 <el-main>
                     <el-row :gutter="20">
@@ -35,6 +38,14 @@
                     </el-row>
                     <el-row>
                         <el-col :span="8">
+                            <SunBrustResourceChart
+                                :id="`${room.name}Resource`"
+                                :name="`${room.name}Resource`"
+                                :roomData="room.store"
+                                :visable="!!screepsData"
+                            />
+                        </el-col>
+                        <el-col :span="8">
                             <div class="grid-content bg-white">
                                 <FlexibleLineChart
                                     :id="`${room.name}controllerProgress`"
@@ -43,6 +54,14 @@
                                     :yData="screepsData.timeSeriesData.roomData[room.name].controllerProgress.data"
                                     :visable="!!screepsData.timeSeriesData.roomData[room.name]"
                                     :name="`${room.name}controllerProgress`"
+                                />
+                                <FlexibleLineChart
+                                    :id="`${room.name}storageEnergy`"
+                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
+                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
+                                    :yData="screepsData.timeSeriesData.roomData[room.name].storageData.energy.data"
+                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :name="`${room.name}storageEnergy`"
                                 />
                             </div>
                         </el-col>
@@ -94,11 +113,12 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/renderData/type";
+import { ScreepsData } from "@/data/type";
 import { Base64 } from "js-base64";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
+import SunBrustResourceChart from "./echarts/SunBrustResourceChart.vue";
 import ListOfCreepDialog from "./ListOfCreepDialog.vue";
 import MermaidDialog from "./MermaidDialog.vue";
 import TextContainer from "./TextContainer.vue";
@@ -109,7 +129,8 @@ import TextContainer from "./TextContainer.vue";
         TextContainer,
         MermaidDialog,
         ListOfCreepDialog,
-        FlexibleLineChart
+        FlexibleLineChart,
+        SunBrustResourceChart
     },
     props: {
         screepsData: Object

@@ -6,7 +6,7 @@
 import { Options, Vue } from "vue-class-component";
 import Container from "./components/Container.vue";
 
-import { ScreepsData } from "./renderData/type";
+import { ScreepsData } from "./data/type";
 
 @Options({
     components: {
@@ -30,6 +30,5 @@ export default class MainApp extends Vue {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
 }
 </style>

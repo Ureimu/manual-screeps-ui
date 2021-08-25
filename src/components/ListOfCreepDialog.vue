@@ -116,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import { creepBodyConfigDetail, CreepGroupMemory, CreepGroupMode, SpawnPoolData } from "@/renderData/type";
+import { creepBodyConfigDetail, CreepGroupMemory, CreepGroupMode, SpawnPoolData } from "@/data/type";
 import { Options, Vue } from "vue-class-component";
 // Define the component in class-style
 type CreepData = {

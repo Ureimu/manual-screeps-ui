@@ -25,7 +25,8 @@ import {
     ElTableColumn,
     ElTabPane,
     ElTabs,
-    ElTag
+    ElTag,
+    ElDivider
 } from "element-plus";
 import lang from "element-plus/lib/locale/lang/zh-cn";
 import locale from "element-plus/lib/locale";
@@ -59,7 +60,8 @@ export default (app: any) => {
         ElPopover,
         ElTag,
         ElSpace,
-        ElCard
+        ElCard,
+        ElDivider
     ];
     elementList.forEach(ele => app.use(ele));
 };

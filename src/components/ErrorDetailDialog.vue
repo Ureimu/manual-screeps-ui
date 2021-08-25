@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { SingleErrorCache } from "@/renderData/type";
+import { SingleErrorCache } from "@/data/type";
 import { Options, Vue } from "vue-class-component";
 // Define the component in class-style
 

@@ -1,6 +1,6 @@
 <template>
     {{ runRenderWhenVisable ? `` : `not rendered` }}
-    <div :id="id + time + random" style="height:260px;width:520px;margin:0 auto;"></div>
+    <div :id="id + time + random" style="height: 260px; width: 520px; margin: 0 auto"></div>
 </template>
 
 <script lang="ts">
@@ -12,7 +12,7 @@ import { SVGRenderer } from "echarts/renderers";
 import { TooltipComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { TitleComponent } from "echarts/components";
-
+/* eslint-disable no-unused-vars */
 echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);
 
 // Define the component in class-style
@@ -94,18 +94,34 @@ export default class FlexibleLineChart extends Vue {
         let option = {
             tooltip: {
                 trigger: "axis",
-                position: function(pt: number[]) {
-                    return [pt[0], "-20%"];
+                position: function (
+                    pos: number[],
+                    _params: any,
+                    _dom: any,
+                    _rect: any,
+                    size: { contentSize: [width: number, height: number]; viewSize: [width: number, height: number] }
+                ) {
+                    let obj: { top: number|string; left?: number; right?: number } = { top: "-20%",left:50 };
+                    return obj;
                 },
-                formatter: (params:{ data: [timeStamp:number, value:number]; dataIndex: number;seriesName:string;color:string ;marker:string}[]) => {
-                    console.log(params)
-                    let str = ""
-                    if(!params[0]) return str
-                    const { data, dataIndex }=params[0]
-                    str+= `时间: ${this.getTime(data[0])}<br>tick: ${this.gameTimeData[dataIndex]}<br>`
+                extraCssText: 'text-align: left',
+                formatter: (
+                    params: {
+                        data: [timeStamp: number, value: number];
+                        dataIndex: number;
+                        seriesName: string;
+                        color: string;
+                        marker: string;
+                    }[]
+                ) => {
+                    console.log(params);
+                    let str = "";
+                    if (!params[0]) return str;
+                    const { data, dataIndex } = params[0];
+                    str += `时间: ${this.getTime(data[0])}<br>tick: ${this.gameTimeData[dataIndex]}<br>`;
                     for (let index = 0; index < params.length; index++) {
-                        const { data,seriesName,marker }=params[index]
-                        str+= `${marker} ${seriesName}: <b>${data[1]}</b> <br>`
+                        const { data, seriesName, marker } = params[index];
+                        str += `${marker} ${seriesName}: <b>${data[1]}</b> <br>`;
                     }
                     return str;
                 }

@@ -81,6 +81,11 @@ export type creepBodyConfigDetail = Partial<
 >;
 
 export interface RoomData {
+    store: {
+        storage?: StoreData;
+        terminal?: StoreData;
+        factory?: StoreData;
+    };
     controller: {
         progressSpeed: string;
         ticksToUpgrade: string;
@@ -131,4 +136,9 @@ export interface FrameStats<T extends string | number | number[]> {
             };
         };
     };
+}
+
+export interface StoreData {
+    store: Record<string, number>;
+    storeCapacity: number;
 }

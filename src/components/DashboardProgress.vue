@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { LevelData } from "@/renderData/type";
+import { LevelData } from "@/data/type";
 import { Options, Vue } from "vue-class-component";
 //<span class="percentage-value">{{ percentage }}%</span>
 @Options({

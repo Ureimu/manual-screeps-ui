@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/renderData/type";
+import { ScreepsData } from "@/data/type";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
 import RoomDataContainer from "./RoomDataContainer.vue";
