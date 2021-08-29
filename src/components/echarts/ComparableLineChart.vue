@@ -158,8 +158,10 @@ export default class ComparableLineChart extends Vue {
                     console.log(params);
                     let str = "";
                     if (!params[0]) return str;
-                    const { data, dataIndex } = params[0];
-                    str += `时间: ${this.getTime(data[0])}<br>tick: ${this.gameTimeData[dataIndex]}<br>`;
+                    const { dataIndex } = params[0];
+                    str += `时间: ${this.getTime(this.timeData[dataIndex])}<br>tick: ${
+                        this.gameTimeData[dataIndex]
+                    }<br>`;
                     for (let index = 0; index < params.length; index++) {
                         const { data, seriesName, marker } = params[index];
                         str += `${marker} ${seriesName}: <b>${data[1]}</b> <br>`;
