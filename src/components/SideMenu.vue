@@ -3,8 +3,6 @@
         :uniqueOpened="true"
         default-active="1"
         class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -29,19 +27,57 @@
             </span>
         </el-submenu>
     </el-menu>
+    <span>
+        <p>
+            <el-switch
+                style="display: block"
+                v-model="isUsingTimeAxis"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                active-text="时间轴"
+                inactive-text="tick轴"
+            >
+            </el-switch>
+        </p>
+        <p>
+            {{ switchState ? "time" : "tick" }}
+        </p>
+    </span>
 </template>
 
 <script lang="ts">
 import { ScreepsData } from "@/data/type";
+
+import { AXIS_TYPE } from "@/store/mutations";
 import { Options, Vue } from "vue-class-component";
 // Define the component in class-style
 @Options({
     props: {
         screepsData: Object
+    },
+    computed: {
+        switchState(): boolean {
+            if (this.isUsingTimeAxis) {
+                if (this.$store.state.options[AXIS_TYPE] !== "time") {
+                    this.$store.commit(AXIS_TYPE, "time");
+                }
+
+                // console.log("time");
+                console.log("store: " + this.$store.state.options[AXIS_TYPE]);
+            } else {
+                if (this.$store.state.options[AXIS_TYPE] !== "tick") {
+                    this.$store.commit(AXIS_TYPE, "tick");
+                }
+                // console.log("tick");
+                console.log("store: " + this.$store.state.options[AXIS_TYPE]);
+            }
+            return this.isUsingTimeAxis;
+        }
     }
 })
 export default class SideMenu extends Vue {
     screepsData!: ScreepsData;
+    isUsingTimeAxis = true;
     // Class properties will be component data
 }
 </script>

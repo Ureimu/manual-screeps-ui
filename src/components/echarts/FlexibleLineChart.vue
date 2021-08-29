@@ -12,6 +12,7 @@ import { SVGRenderer } from "echarts/renderers";
 import { TooltipComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { TitleComponent } from "echarts/components";
+import { AXIS_TYPE } from "@/store/mutations";
 /* eslint-disable no-unused-vars */
 echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);
 
@@ -27,8 +28,11 @@ echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomCo
     },
     computed: {
         runRenderWhenVisable() {
-            if (this.visable || this.hasMounted) this.runRender();
-            return this.visable && this.hasMounted;
+            this.runRender();
+            return this.visable && this.hasMounted && this.xAxis;
+        },
+        xAxis() {
+            return this.$store.state.options[AXIS_TYPE];
         }
     }
 })
@@ -42,6 +46,8 @@ export default class FlexibleLineChart extends Vue {
     gameTimeData!: number[];
     time = Date.now().toString();
     random = Math.random().toFixed(10);
+    myChart!: echarts.ECharts;
+    xAxis!: string;
     mounted(): void {
         this.hasMounted = true;
     }
@@ -49,9 +55,17 @@ export default class FlexibleLineChart extends Vue {
         if (!this.yData) return;
         console.log(`${this.id} runRender`);
         let chartDom = document.getElementById(this.id + this.time + this.random);
-        const fullData: [number, number][] = this.yData.map((value, index) => {
-            return [this.timeData[index], value];
-        });
+        let fullData: [number, number][];
+        if (this.xAxis === "time") {
+            fullData = this.yData.map((value, index) => {
+                return [this.timeData[index], value];
+            });
+        } else {
+            fullData = this.yData.map((value, index) => {
+                return [this.gameTimeData[index], value];
+            });
+        }
+
         const numberFormatter = (value: number) => {
             const absoluteValue = Math.abs(value);
             const magnitude = Math.log10(absoluteValue);
@@ -90,7 +104,14 @@ export default class FlexibleLineChart extends Vue {
         }
         if (!chartDom) return;
         console.log(`${this.id} start render line chart`);
-        let myChart = echarts.init(chartDom);
+        let myChart;
+        if (!this.myChart) {
+            myChart = echarts.init(chartDom);
+            this.myChart = myChart;
+        } else {
+            myChart = this.myChart;
+        }
+        console.log(this.xAxis);
         let option = {
             tooltip: {
                 trigger: "axis",
@@ -101,10 +122,10 @@ export default class FlexibleLineChart extends Vue {
                     _rect: any,
                     size: { contentSize: [width: number, height: number]; viewSize: [width: number, height: number] }
                 ) {
-                    let obj: { top: number|string; left?: number; right?: number } = { top: "-20%",left:50 };
+                    let obj: { top: number | string; left?: number; right?: number } = { top: "-20%", left: 50 };
                     return obj;
                 },
-                extraCssText: 'text-align: left',
+                extraCssText: "text-align: left",
                 formatter: (
                     params: {
                         data: [timeStamp: number, value: number];
@@ -131,18 +152,7 @@ export default class FlexibleLineChart extends Vue {
                 top: "top",
                 left: "center"
             },
-            xAxis: {
-                type: "time",
-                axisLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: true
-                }
-            },
+            xAxis: {},
             yAxis: [
                 {
                     type: "value",
@@ -209,6 +219,35 @@ export default class FlexibleLineChart extends Vue {
                 }
             ]
         };
+        if (this.xAxis === "time") {
+            option.xAxis = {
+                type: "time",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true
+                }
+            };
+        } else {
+            option.xAxis = {
+                type: "value",
+                min: "dataMin",
+                max: "dataMax",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true
+                }
+            };
+        }
         myChart.setOption(option);
     }
     getTime(time: number): string {

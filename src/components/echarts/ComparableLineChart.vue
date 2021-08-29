@@ -13,11 +13,12 @@ import { TooltipComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { TitleComponent } from "echarts/components";
 import { SingleData } from "@/data/type";
-/* eslint-disable no-unused-vars */
+import { AXIS_TYPE } from "@/store/mutations";
+
 echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);
 
 // Define the component in class-style
-@Options({
+@Options<ComparableLineChart>({
     props: {
         name: String,
         id: String,
@@ -28,8 +29,11 @@ echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomCo
     },
     computed: {
         runRenderWhenVisable() {
-            if (this.visable || this.hasMounted) this.runRender();
-            return this.visable && this.hasMounted;
+            this.runRender();
+            return this.visable && this.hasMounted && this.xAxis;
+        },
+        xAxis() {
+            return this.$store.state.options[AXIS_TYPE];
         }
     }
 })
@@ -45,6 +49,8 @@ export default class ComparableLineChart extends Vue {
     gameTimeData!: number[];
     time = Date.now().toString();
     random = Math.random().toFixed(10);
+    myChart!: echarts.ECharts;
+    xAxis!: string;
     mounted(): void {
         this.hasMounted = true;
     }
@@ -54,11 +60,21 @@ export default class ComparableLineChart extends Vue {
         const nameList = Object.entries(this.yDataList).map(entry => entry[0]);
         console.log(`${this.id} runRender`);
         let chartDom = document.getElementById(this.id + this.time + this.random);
-        const fullDataList: [number, number][][] = dataList.map(value => {
-            return value.map((value2, index) => {
-                return [this.timeData[index], value2];
+        let fullDataList: [number, number][][];
+        if (this.xAxis === "time") {
+            fullDataList = dataList.map(value => {
+                return value.map((value2, index) => {
+                    return [this.timeData[index], value2];
+                });
             });
-        });
+        } else {
+            fullDataList = dataList.map(value => {
+                return value.map((value2, index) => {
+                    return [this.gameTimeData[index], value2];
+                });
+            });
+        }
+
         const numberFormatter = (value: number) => {
             const absoluteValue = Math.abs(value);
             const magnitude = Math.log10(absoluteValue);
@@ -114,17 +130,18 @@ export default class ComparableLineChart extends Vue {
         });
         if (!chartDom) return;
         console.log(`${this.id} start render multi line chart`);
-        let myChart = echarts.init(chartDom);
+        let myChart;
+        if (!this.myChart) {
+            myChart = echarts.init(chartDom);
+            this.myChart = myChart;
+        } else {
+            myChart = this.myChart;
+        }
+        console.log(this.xAxis);
         let option = {
             tooltip: {
                 trigger: "axis",
-                position: function (
-                    pos: number[],
-                    _params: any,
-                    _dom: any,
-                    _rect: any,
-                    size: { contentSize: [width: number, height: number]; viewSize: [width: number, height: number] }
-                ) {
+                position: function () {
                     let obj: { top: number | string; left?: number; right?: number } = { top: "-20%", left: 50 };
                     return obj;
                 },
@@ -155,18 +172,7 @@ export default class ComparableLineChart extends Vue {
                 top: "top",
                 left: "center"
             },
-            xAxis: {
-                type: "time",
-                axisLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: true
-                }
-            },
+            xAxis: {},
             yAxis: [
                 {
                     type: "value",
@@ -199,6 +205,35 @@ export default class ComparableLineChart extends Vue {
             ],
             series
         };
+        if (this.xAxis === "time") {
+            option.xAxis = {
+                type: "time",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true
+                }
+            };
+        } else {
+            option.xAxis = {
+                type: "value",
+                min: "dataMin",
+                max: "dataMax",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true
+                }
+            };
+        }
         myChart.setOption(option);
     }
     getTime(time: number): string {

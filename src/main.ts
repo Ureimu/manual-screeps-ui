@@ -5,8 +5,9 @@ import { ScreepsData } from "./data/type";
 import { Base64 } from "js-base64";
 import { runRender } from "./renderData";
 import { testData } from "./data";
+import store from "./store";
 
-const app = createApp(MainApp);
+const app = createApp(MainApp).use(store);
 installElementPlus(app);
 
 if (process.env.NODE_ENV !== "production") {
