@@ -12,7 +12,7 @@ import { SVGRenderer } from "echarts/renderers";
 import { TooltipComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { TitleComponent } from "echarts/components";
-import { SingleData } from "@/data/type";
+import { SingleData } from "@/data/type/origin";
 import { AXIS_TYPE } from "@/store/mutations";
 
 echarts.use([GridComponent, LineChart, SVGRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);

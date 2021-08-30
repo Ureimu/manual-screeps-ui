@@ -1,17 +1,18 @@
 import { createApp } from "vue";
 import MainApp from "./App.vue";
 import installElementPlus from "./plugins/element";
-import { ScreepsData } from "./data/type";
+import { ScreepsData } from "./data/type/converted";
 import { Base64 } from "js-base64";
 import { runRender } from "./renderData";
 import { testData } from "./data";
 import store from "./store";
+import { OriginScreepsData } from "./data/type/origin";
 
 const app = createApp(MainApp).use(store);
 installElementPlus(app);
 
 if (process.env.NODE_ENV !== "production") {
-    const fullData: ScreepsData = testData;
+    const fullData: OriginScreepsData = testData;
     runRender(fullData, app);
 } else {
     let fullData: ScreepsData;

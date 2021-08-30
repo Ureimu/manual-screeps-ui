@@ -13,7 +13,7 @@ import { TooltipComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { TitleComponent } from "echarts/components";
 import { SunburstChart } from "echarts/charts";
-import { StoreData } from "@/data/type";
+import { StoreData } from "@/data/type/origin";
 /* eslint-disable no-unused-vars */
 echarts.use([
     GridComponent,

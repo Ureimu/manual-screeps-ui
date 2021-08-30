@@ -1,5 +1,6 @@
-import { ScreepsData } from "@/data/type";
+import { ScreepsData } from "@/data/type/converted";
 import _ from "lodash";
+import { OriginScreepsData } from "./type/origin";
 const runEpoch = (num: number, f: () => unknown) => {
     for (let i = 0; i < num; i++) {
         f();
@@ -33,7 +34,7 @@ const controllerProgressData2 = getRandomSumList(
     controllerProgressData1[controllerProgressData1.length - 1]
 ).concat(getRandomSumList(0, 4000, length / 2, 5.9e6));
 const controllerProgressData = controllerProgressData1.concat(controllerProgressData2);
-export const testData: ScreepsData = {
+export const testData: OriginScreepsData = {
     timeSeriesData: {
         userData: {
             credits: {
@@ -73,22 +74,22 @@ export const testData: ScreepsData = {
                 },
                 outwardsSourceEnergy: {
                     E32S21: {
-                        data: getRandomSumList(-10000, 10000, length, 6e5),
+                        data: getRandomSumList(-40, 40, length, 5e3),
                         depth: 21,
                         type: "any"
                     },
                     E31S21: {
-                        data: getRandomSumList(-10000, 10000, length, 7e5),
+                        data: getRandomSumList(-40, 40, length, 6e3),
                         depth: 21,
                         type: "any"
                     },
                     E35S21: {
-                        data: getRandomSumList(-10000, 10000, length, 5e5),
+                        data: getRandomSumList(-40, 40, length, 4e3),
                         depth: 21,
                         type: "any"
                     },
                     E35S22: {
-                        data: getRandomSumList(-10000, 10000, length, 4e5),
+                        data: getRandomSumList(-40, 40, length, 5e3),
                         depth: 21,
                         type: "any"
                     }
@@ -109,12 +110,12 @@ export const testData: ScreepsData = {
                 },
                 outwardsSourceEnergy: {
                     E32S21: {
-                        data: getRandomSumList(-1000, 1000, length, 6e5),
+                        data: getRandomSumList(-40, 40, length, 5e3),
                         depth: 21,
                         type: "any"
                     },
                     E31S21: {
-                        data: getRandomSumList(-1000, 1000, length, 6e5),
+                        data: getRandomSumList(-40, 40, length, 5e3),
                         depth: 21,
                         type: "any"
                     }

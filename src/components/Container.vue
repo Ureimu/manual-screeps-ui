@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/data/type";
+import { ScreepsData } from "@/data/type/converted";
 import { Options, Vue } from "vue-class-component";
 import Layout from "./Layout.vue";
 import SideMenu from "./SideMenu.vue";

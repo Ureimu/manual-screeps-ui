@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { ErrorSegmentMemory } from "@/data/type";
+import { ErrorSegmentMemory } from "@/data/type/origin";
 import { Options, Vue } from "vue-class-component";
 import ErrorDetailDialog from "./ErrorDetailDialog.vue";
 // Define the component in class-style

@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/data/type";
+import { ScreepsData } from "@/data/type/converted";
 
 import { AXIS_TYPE } from "@/store/mutations";
 import { Options, Vue } from "vue-class-component";

@@ -6,7 +6,7 @@
 import { Options, Vue } from "vue-class-component";
 import Container from "./components/Container.vue";
 
-import { ScreepsData } from "./data/type";
+import { ScreepsData } from "./data/type/converted";
 
 @Options({
     components: {

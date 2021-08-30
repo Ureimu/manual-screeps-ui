@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/data/type";
+import { ScreepsData } from "@/data/type/converted";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";

@@ -13,7 +13,7 @@
                 :title="msg"
                 :percentage="levelData ? (levelData.progress / levelData.progressTotal) * 100 : 0"
             >
-                <template #default="{  }">
+                <template #default="{}">
                     <span class="percentage-label">{{ levelData?.level }}</span>
                 </template>
             </el-progress></el-main
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { LevelData } from "@/data/type";
+import { LevelData } from "@/data/type/origin";
 import { Options, Vue } from "vue-class-component";
 //<span class="percentage-value">{{ percentage }}%</span>
 @Options({

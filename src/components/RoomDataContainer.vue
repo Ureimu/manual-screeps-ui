@@ -75,6 +75,14 @@
                                     :visable="!!screepsData.timeSeriesData.roomData[room.name]"
                                     :name="`${room.name}outwardsSourceEnergy`"
                                 />
+                                <ComparableLineChart
+                                    :id="`${room.name}outwardsSourceEnergyAverage`"
+                                    :timeData="screepsData.external.limitedData.timeStamp.data"
+                                    :gameTimeData="screepsData.external.limitedData.gameTime.data"
+                                    :yDataList="screepsData.external.averageEnergyData[room.name]"
+                                    :visable="!!screepsData?.external"
+                                    :name="`${room.name}outwardsSourceEnergyAverage`"
+                                />
                             </div>
                         </el-col>
                     </el-row>
@@ -113,7 +121,7 @@
 </template>
 
 <script lang="ts">
-import { ScreepsData } from "@/data/type";
+import { ScreepsData } from "@/data/type/converted";
 import { Base64 } from "js-base64";
 import { Options, Vue } from "vue-class-component";
 import DashboardProgressBar from "./DashboardProgress.vue";

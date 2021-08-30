@@ -1,4 +1,4 @@
-export interface ScreepsData {
+export interface OriginScreepsData {
     timeSeriesData: FrameStats<number[]> & { timeStamp: SingleData<number[]>; gameTime: SingleData<number[]> };
     timeData: {
         tick: number;
