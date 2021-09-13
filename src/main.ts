@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== "production") {
                 runRender(JSON.parse(Base64.decode(fullData)) as ScreepsData, app);
             }
         } catch (e) {
-            alert(`代码错误，如果可以的话，请联系 Ureium\n${(e as Error).toString()}`);
+            alert(`代码错误，如果可以的话，请联系 Ureium\n${(e as Error).stack}`);
             throw e;
         }
     });
