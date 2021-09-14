@@ -26,17 +26,19 @@ export function generateExternalData(originData: OriginScreepsData): ExternalScr
     externalScreepsData.external.limitedData.timeStamp.data = limitedTimeData
     Object.entries(originData.timeSeriesData.roomData).forEach(([roomName, roomData]) => {
         externalScreepsData.external.averageEnergyData[roomName] = { };
-        Object.entries(roomData.outwardsSourceEnergy).forEach(([sourceName, sourceData]) => {
-            const averageEnergyList: number[] = []
-            availableData.forEach(([indexStart, indexEnd, duration]) => {
-                if (indexStart !== -1) {
-                    averageEnergyList.push(Math.round(sourceData.data.slice(indexStart + 1, indexEnd + 1).reduce((sum, num) => sum + num, 0) / duration * 1500))
-                }
-            })
-            externalScreepsData.external.averageEnergyData[roomName][sourceName] = {
-                data: averageEnergyList
-            };
-        });
+        if(roomData.outwardsSourceEnergy){
+            Object.entries(roomData.outwardsSourceEnergy).forEach(([sourceName, sourceData]) => {
+                const averageEnergyList: number[] = []
+                availableData.forEach(([indexStart, indexEnd, duration]) => {
+                    if (indexStart !== -1) {
+                        averageEnergyList.push(Math.round(sourceData.data.slice(indexStart + 1, indexEnd + 1).reduce((sum, num) => sum + num, 0) / duration * 1500))
+                    }
+                })
+                externalScreepsData.external.averageEnergyData[roomName][sourceName] = {
+                    data: averageEnergyList
+                };
+            });
+        }
     });
     console.log(JSON.stringify(externalScreepsData))
     return externalScreepsData;

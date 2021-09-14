@@ -7,13 +7,15 @@ import { runRender } from "./renderData";
 import { testData } from "./data";
 import store from "./store";
 import { OriginScreepsData } from "./data/type/origin";
+import { rawData } from "./data/rawData";
 
 const app = createApp(MainApp).use(store);
 installElementPlus(app);
 
 if (process.env.NODE_ENV !== "production") {
     const fullData: OriginScreepsData = testData;
-    runRender(fullData, app);
+    //runRender(fullData, app);
+    runRender(JSON.parse(Base64.decode(rawData)) as ScreepsData, app);
 } else {
     let fullData: ScreepsData;
     window.addEventListener("message", ({ data }) => {
