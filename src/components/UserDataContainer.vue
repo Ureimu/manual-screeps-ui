@@ -62,9 +62,9 @@
                     <div class="grid-content bg-white">
                         <FlexibleLineChart
                             :id="`credits`"
-                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
-                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                            :yData="screepsData?.timeSeriesData.userData.credits.data"
+                            :timeData="screepsData?.timeSeriesData?.timeStamp?.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime?.data"
+                            :yData="screepsData?.timeSeriesData.userData?.credits.data"
                             :visable="!!screepsData"
                             :name="`credits`"
                         /></div
@@ -73,9 +73,9 @@
                     <div class="grid-content bg-white">
                         <FlexibleLineChart
                             :id="`pixels`"
-                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
-                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                            :yData="screepsData?.timeSeriesData.userData.pixels.data"
+                            :timeData="screepsData?.timeSeriesData.timeStamp?.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime?.data"
+                            :yData="screepsData?.timeSeriesData.userData?.pixels.data"
                             :visable="!!screepsData"
                             :name="`pixels`"
                         /></div
@@ -84,9 +84,9 @@
                     <div class="grid-content bg-white">
                         <FlexibleLineChart
                             :id="`gclProgress`"
-                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
-                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                            :yData="screepsData?.timeSeriesData.userData.gclProgress.data"
+                            :timeData="screepsData?.timeSeriesData.timeStamp?.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime?.data"
+                            :yData="screepsData?.timeSeriesData.userData?.gclProgress.data"
                             :visable="!!screepsData"
                             :name="`gclProgress`"
                         /></div
@@ -97,9 +97,9 @@
                     <div class="grid-content bg-white">
                         <FlexibleLineChart
                             :id="`gplProgress`"
-                            :timeData="screepsData?.timeSeriesData.timeStamp.data"
-                            :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                            :yData="screepsData?.timeSeriesData.userData.gplProgress.data"
+                            :timeData="screepsData?.timeSeriesData.timeStamp?.data"
+                            :gameTimeData="screepsData?.timeSeriesData.gameTime?.data"
+                            :yData="screepsData?.timeSeriesData.userData?.gplProgress.data"
                             :visable="!!screepsData"
                             :name="`gplProgress`"
                         />

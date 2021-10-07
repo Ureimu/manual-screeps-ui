@@ -15,7 +15,9 @@ installElementPlus(app);
 if (process.env.NODE_ENV !== "production") {
     const fullData: OriginScreepsData = testData;
     //runRender(fullData, app);
-    runRender(JSON.parse(Base64.decode(rawData)) as ScreepsData, app);
+    const data = JSON.parse(Base64.decode(rawData)) as ScreepsData;
+    console.log(data);
+    runRender(data, app);
 } else {
     let fullData: ScreepsData;
     window.addEventListener("message", ({ data }) => {

@@ -4,7 +4,11 @@ import _ from "lodash";
 
 export function generateExternalData(originData: OriginScreepsData): ExternalScreepsData {
     const externalScreepsData: ExternalScreepsData = { external: { averageEnergyData: { }, limitedData: { gameTime: { data: [] }, timeStamp: { data: [] } } } };
-    const gameTimeData = originData.timeSeriesData.gameTime.data;
+    const gameTimeData = originData?.timeSeriesData?.gameTime?.data;
+    if(!gameTimeData){
+        throw new Error("timeSeriesData 未定义");
+        return externalScreepsData
+    }
     const tickLimit = 15000;
     console.log(gameTimeData)
     const availableData = gameTimeData.map((tick, index, tickData): [indexStart: number, indexEnd: number, duration: number] => {
@@ -20,11 +24,11 @@ export function generateExternalData(originData: OriginScreepsData): ExternalScr
         return returnData
     });
     console.log(availableData)
-    const limitedTimeData = _.pull(availableData.map(([index]) => index === -1 ? -1 : originData.timeSeriesData.timeStamp.data[index]), -1);
-    const limitedTickData = _.pull(availableData.map(([index]) => index === -1 ? -1 : originData.timeSeriesData.gameTime.data[index]), -1);
+    const limitedTimeData = _.pull(availableData.map(([index]) => index === -1 ? -1 : originData.timeSeriesData?.timeStamp.data[index]), -1);
+    const limitedTickData = _.pull(availableData.map(([index]) => index === -1 ? -1 : originData.timeSeriesData?.gameTime.data[index]), -1);
     externalScreepsData.external.limitedData.gameTime.data = limitedTickData
     externalScreepsData.external.limitedData.timeStamp.data = limitedTimeData
-    Object.entries(originData.timeSeriesData.roomData).forEach(([roomName, roomData]) => {
+    Object.entries(originData.timeSeriesData?.roomData).forEach(([roomName, roomData]) => {
         externalScreepsData.external.averageEnergyData[roomName] = { };
         if(roomData.outwardsSourceEnergy){
             Object.entries(roomData.outwardsSourceEnergy).forEach(([sourceName, sourceData]) => {

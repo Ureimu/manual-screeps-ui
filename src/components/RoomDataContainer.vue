@@ -49,18 +49,18 @@
                             <div class="grid-content bg-white">
                                 <FlexibleLineChart
                                     :id="`${room.name}controllerProgress`"
-                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
-                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                                    :yData="screepsData.timeSeriesData.roomData[room.name].controllerProgress.data"
-                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :timeData="screepsData.timeSeriesData?.timeStamp?.data"
+                                    :gameTimeData="screepsData?.timeSeriesData?.gameTime?.data"
+                                    :yData="screepsData.timeSeriesData?.roomData?.[room.name].controllerProgress.data"
+                                    :visable="!!screepsData.timeSeriesData?.roomData?.[room.name]"
                                     :name="`${room.name}controllerProgress`"
                                 />
                                 <FlexibleLineChart
                                     :id="`${room.name}storageEnergy`"
-                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
-                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                                    :yData="screepsData.timeSeriesData.roomData[room.name].storageData.energy.data"
-                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :timeData="screepsData.timeSeriesData?.timeStamp?.data"
+                                    :gameTimeData="screepsData?.timeSeriesData?.gameTime?.data"
+                                    :yData="screepsData.timeSeriesData?.roomData?.[room.name].storageData.energy.data"
+                                    :visable="!!screepsData.timeSeriesData?.roomData?.[room.name]"
                                     :name="`${room.name}storageEnergy`"
                                 />
                             </div>
@@ -69,10 +69,10 @@
                             <div class="grid-content bg-white">
                                 <ComparableLineChart
                                     :id="`${room.name}outwardsSourceEnergy`"
-                                    :timeData="screepsData.timeSeriesData.timeStamp.data"
-                                    :gameTimeData="screepsData?.timeSeriesData.gameTime.data"
-                                    :yDataList="screepsData.timeSeriesData.roomData[room.name].outwardsSourceEnergy"
-                                    :visable="!!screepsData.timeSeriesData.roomData[room.name]"
+                                    :timeData="screepsData.timeSeriesData?.timeStamp?.data"
+                                    :gameTimeData="screepsData?.timeSeriesData?.gameTime?.data"
+                                    :yDataList="screepsData.timeSeriesData?.roomData?.[room.name].outwardsSourceEnergy"
+                                    :visable="!!screepsData.timeSeriesData?.roomData?.[room.name]"
                                     :name="`${room.name}outwardsSourceEnergy`"
                                 />
                                 <ComparableLineChart
