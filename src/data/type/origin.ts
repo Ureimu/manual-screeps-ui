@@ -66,7 +66,7 @@ export interface SpawnPoolData {
     creepName: string;
     creepBody: string;
     priority: number;
-    readyCondition: string;
+    spawnCondition: string;
     state: string;
     roomName: string;
 }

@@ -379,7 +379,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21h0",
                     creepBody: "harvester",
                     priority: 10,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 },
@@ -387,7 +387,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21h1",
                     creepBody: "harvester",
                     priority: 10,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 },
@@ -395,7 +395,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21up1t",
                     creepBody: "worker",
                     priority: 8,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 },
@@ -403,7 +403,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21build0t",
                     creepBody: "worker",
                     priority: 7,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 },
@@ -411,7 +411,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21build1t",
                     creepBody: "worker",
                     priority: 7,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 },
@@ -419,7 +419,7 @@ export const testData: OriginScreepsData = {
                     creepName: "W34N21up2t",
                     creepBody: "worker",
                     priority: 5,
-                    readyCondition: "loop",
+                    spawnCondition: "loop",
                     state: "notReady",
                     roomName: "W34N21"
                 }

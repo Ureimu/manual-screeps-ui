@@ -49,14 +49,14 @@
                 </template>
             </el-table-column>
             <el-table-column
-                prop="readyCondition"
+                prop="spawnCondition"
                 label="准备条件"
                 width="120"
-                :filters="getFliter(`readyCondition`)"
+                :filters="getFliter(`spawnCondition`)"
                 :filter-method="filterHandler"
             >
                 <template #default="scope">
-                    <span style="margin-left: 5px">{{ scope.row.readyCondition }}</span>
+                    <span style="margin-left: 5px">{{ scope.row.spawnCondition }}</span>
                 </template>
             </el-table-column>
             <el-table-column

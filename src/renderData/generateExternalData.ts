@@ -3,7 +3,8 @@ import { OriginScreepsData } from "@/data/type/origin";
 import _ from "lodash";
 
 export function generateExternalData(originData: OriginScreepsData): ExternalScreepsData {
-    const externalScreepsData: ExternalScreepsData = { external: { averageEnergyData: { }, limitedData: { gameTime: { data: [] }, timeStamp: { data: [] } } } };
+    const externalScreepsData: ExternalScreepsData = { external: { averageEnergyData: {}, limitedData: { gameTime: { data: [] }, timeStamp: { data: [] } } } };
+    console.log(originData?.timeSeriesData)
     const gameTimeData = originData?.timeSeriesData?.gameTime?.data;
     if(!gameTimeData){
         throw new Error("timeSeriesData 未定义");
@@ -29,13 +30,16 @@ export function generateExternalData(originData: OriginScreepsData): ExternalScr
     externalScreepsData.external.limitedData.gameTime.data = limitedTickData
     externalScreepsData.external.limitedData.timeStamp.data = limitedTimeData
     Object.entries(originData.timeSeriesData?.roomData).forEach(([roomName, roomData]) => {
-        externalScreepsData.external.averageEnergyData[roomName] = { };
+        externalScreepsData.external.averageEnergyData[roomName] = {};
         if(roomData.outwardsSourceEnergy){
             Object.entries(roomData.outwardsSourceEnergy).forEach(([sourceName, sourceData]) => {
                 const averageEnergyList: number[] = []
                 availableData.forEach(([indexStart, indexEnd, duration]) => {
                     if (indexStart !== -1) {
-                        averageEnergyList.push(Math.round(sourceData.data.slice(indexStart + 1, indexEnd + 1).reduce((sum, num) => sum + num, 0) / duration * 1500))
+                        const sliceData=sourceData.data.slice(indexStart + 1, indexEnd + 1)
+                        console.log("leg"+ sliceData.length)
+                        const a=Math.round(sliceData.reduce((sum, num) => sum + (num??0), 0) / duration * 1500)
+                        averageEnergyList.push(a)
                     }
                 })
                 externalScreepsData.external.averageEnergyData[roomName][sourceName] = {
