@@ -95,6 +95,16 @@
                                     :id="room.name + `maintenance`"
                                     :msg="`房间运维`"
                                 />
+                                <MermaidDialog
+                                    :mermaidCode="decode(room.projectDiagram.getPower)"
+                                    :id="room.name + `getPower`"
+                                    :msg="`power采集`"
+                                />
+                                <MermaidDialog
+                                    :mermaidCode="decode(room.projectDiagram.newRoom)"
+                                    :id="room.name + `newRoom`"
+                                    :msg="`开新房间`"
+                                />
                                 <ListOfCreepDialog
                                     :spawnPoolData="room.spawnPool"
                                     :msg="`${room.name} spawnPool Data`"
