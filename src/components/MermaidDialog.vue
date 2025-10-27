@@ -39,6 +39,7 @@ export default class MermaidDialog extends Vue {
     renderMermaid() {
         console.log("try set codeCache");
         if (this.mermaidCode?.length > 0 && this.mermaidCode !== "undefined") {
+            console.log(this.mermaidCode);
             console.log("set codeCache");
             let insertSvg = (svgCode: string) => {
                 console.log("finishRender:\n" + svgCode);
