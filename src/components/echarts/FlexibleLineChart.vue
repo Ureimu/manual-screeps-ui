@@ -1,6 +1,17 @@
 <template>
     {{ runRenderWhenVisable ? `` : `not rendered` }}
     <div :id="id + time + random" style="height: 260px; width: 520px; margin: 0 auto"></div>
+    <!-- 新增：显示选区计算结果 -->
+    <div style="text-align:center; margin-top:6px; color: #333; font-size: 13px;">
+        <span v-if="selectionDelta !== null"
+            >变化值(delta): <b>{{ selectionDelta }}</b></span
+        >
+        <!-- 修改：显示平均变化率并附加单位 -->
+        <span v-if="selectionAvg !== null" style="margin-left:12px;"
+            >平均变化率(avg): <b>{{ selectionAvg }}{{ selectionAvgUnit }}</b></span
+        >
+        <span v-if="selectionDelta === null && selectionAvg === null">请选择或缩放区间以查看计算结果</span>
+    </div>
 </template>
 
 <script lang="ts">
@@ -48,8 +59,70 @@ export default class FlexibleLineChart extends Vue {
     random = Math.random().toFixed(10);
     myChart!: echarts.ECharts;
     xAxis!: string;
+    // 新增响应式字段：框选结果
+    selectionDelta: number | null = null;
+    selectionAvg: number | null = null;
+    // 新增：平均值单位（"/s" 或 "/tick"）
+    selectionAvgUnit: string | null = null;
     mounted(): void {
         this.hasMounted = true;
+    }
+    // 新增：根据 dataZoom 百分比计算选区（右端点y - 左端点y），以及选区平均值
+    computeSelectionFromPercent(startPercent: number, endPercent: number, fullData: [number, number][]) {
+        if (!fullData || fullData.length === 0) {
+            this.selectionDelta = null;
+            this.selectionAvg = null;
+            this.selectionAvgUnit = null;
+            return;
+        }
+        const len = fullData.length;
+        // clamp and convert percent to indices
+        const sIdx = Math.max(0, Math.min(len - 1, Math.round((startPercent / 100) * (len - 1))));
+        const eIdx = Math.max(0, Math.min(len - 1, Math.round((endPercent / 100) * (len - 1))));
+        const left = Math.min(sIdx, eIdx);
+        const right = Math.max(sIdx, eIdx);
+        if (right < 0 || left >= len) {
+            this.selectionDelta = null;
+            this.selectionAvg = null;
+            this.selectionAvgUnit = null;
+            return;
+        }
+        const yLeft = Number(fullData[left][1]) || 0;
+        const yRight = Number(fullData[right][1]) || 0;
+        const delta = yRight - yLeft;
+
+        const xLeft = Number(fullData[left][0]);
+        const xRight = Number(fullData[right][0]);
+        const span = xRight - xLeft;
+
+        let avgRate: number | null = null;
+        let unit: string | null = null;
+
+        if (span === 0) {
+            // 无跨度，无法定义速率
+            avgRate = null;
+            unit = null;
+        } else {
+            if (this.xAxis === "time") {
+                // 时间轴：x 单位为毫秒，转换为秒再计算 (/s)
+                const spanSeconds = span / 1000;
+                if (spanSeconds > 0) {
+                    avgRate = delta / spanSeconds;
+                    unit = "/s";
+                }
+            } else {
+                // tick 轴：按 tick 计算 (/tick)
+                const spanTicks = span;
+                if (spanTicks > 0) {
+                    avgRate = delta / spanTicks;
+                    unit = "/tick";
+                }
+            }
+        }
+
+        this.selectionDelta = Number.isFinite(delta) ? Number(delta) : null;
+        this.selectionAvg = avgRate !== null && Number.isFinite(avgRate) ? Number(Number(avgRate).toFixed(2)) : null;
+        this.selectionAvgUnit = unit;
     }
     runRender(): void {
         if (!this.yData) return;
@@ -251,6 +324,26 @@ export default class FlexibleLineChart extends Vue {
             };
         }
         myChart.setOption(option);
+
+        // 绑定 datazoom 事件，避免重复绑定先移除
+        myChart.off("datazoom");
+        myChart.on("datazoom", (params: any) => {
+            // params 结构在不同版本可能不同，兼容 batch 与 非 batch 形式
+            let start = 0;
+            let end = 100;
+            if (params.batch && params.batch.length > 0) {
+                start = params.batch[0].start ?? params.batch[0].startValue ?? start;
+                end = params.batch[0].end ?? params.batch[0].endValue ?? end;
+            } else {
+                start = params.start ?? start;
+                end = params.end ?? end;
+            }
+            this.computeSelectionFromPercent(start, end, fullData);
+        });
+
+        // 首次用当前 dataZoom 范围做一次计算（默认 option 中 start=0 end=100）
+        // 如果图表已有 dataZoom 状态，也可以从 myChart.getOption() 读取，但使用初始值保证显示
+        this.computeSelectionFromPercent(0, 100, fullData);
     }
     getTime(time: number): string {
         const addZero = (time: number): string => {

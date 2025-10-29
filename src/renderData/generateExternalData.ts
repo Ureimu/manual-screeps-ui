@@ -10,7 +10,7 @@ export function generateExternalData(originData: OriginScreepsData): ExternalScr
         throw new Error("timeSeriesData 未定义");
         return externalScreepsData
     }
-    const tickLimit = 15000;
+    const tickLimit = 100000;
     console.log(gameTimeData)
     const availableData = gameTimeData.map((tick, index, tickData): [indexStart: number, indexEnd: number, duration: number] => {
         const returnData: [indexStart: number, indexEnd: number, duration: number] = [-1, -1, 0]
