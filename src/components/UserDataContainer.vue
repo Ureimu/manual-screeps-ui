@@ -106,16 +106,14 @@
                     </div>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col :span="8">
-                    <MemoryChart
-                        :id="`Memory`"
-                        :name="`Memory`"
-                        :visable="!!screepsData"
-                        :memoryString="screepsData?.userData.memoryString"
-                    />
-                </el-col>
-            </el-row>
+
+            <MemoryChartDialog
+                :id="`Memory`"
+                :name="`Memory`"
+                :visable="!!screepsData"
+                :memoryString="screepsData?.userData.memoryString"
+            />
+
             <ErrorMemoryDialog title="报错信息" :errorMemory="screepsData?.userData.error" />
         </el-main>
     </el-container>
@@ -128,7 +126,7 @@ import DashboardProgressBar from "./DashboardProgress.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
 import ErrorMemoryDialog from "./ErrorMemoryDialog.vue";
 import TextContainer from "./TextContainer.vue";
-import MemoryChart from "./echarts/MemoryChart.vue";
+import MemoryChartDialog from "./MemoryChartDialog.vue";
 
 @Options({
     props: {
@@ -139,7 +137,7 @@ import MemoryChart from "./echarts/MemoryChart.vue";
         TextContainer,
         ErrorMemoryDialog,
         FlexibleLineChart,
-        MemoryChart
+        MemoryChartDialog
     }
 })
 export default class UserDataContainer extends Vue {

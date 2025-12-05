@@ -1,6 +1,9 @@
 <template>
-    {{ runRenderWhenVisable ? `` : `not rendered` }}
-    <div :id="id + time + random" style="height: 260px; width: 520px; margin: 0 auto"></div>
+    <el-button type="primary" align="left" @click="dialogTableVisible = true">Memory内存分布图</el-button>
+
+    <el-dialog title="Memory Profiler Dialog" :fullscreen="true" v-model="dialogTableVisible" @opened="runRender()">
+        <div :id="id + time + random" style="height: 800px; width: 1800px; margin: 0 auto"></div>
+    </el-dialog>
 </template>
 
 <script lang="ts">
@@ -22,7 +25,7 @@ type treeChildren = {
 };
 
 // Define the component in class-style
-@Options<MemoryChart>({
+@Options<MemoryChartDialog>({
     props: {
         name: String,
         id: String,
@@ -36,7 +39,7 @@ type treeChildren = {
         }
     }
 })
-export default class MemoryChart extends Vue {
+export default class MemoryChartDialog extends Vue {
     id!: string;
     visable!: boolean;
     hasMounted = false;
@@ -45,6 +48,7 @@ export default class MemoryChart extends Vue {
     time = Date.now().toString();
     random = Math.random().toFixed(10);
     myChart!: echarts.ECharts;
+    dialogTableVisible = false;
     mounted(): void {
         this.hasMounted = true;
     }

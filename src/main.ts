@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== "production") {
     //runRender(fullData, app);
     const data = JSON.parse(Base64.decode(rawData)) as ScreepsData;
     console.log(data);
-    runRender(data, app);
+    runRender(fullData, app);
 } else {
     let fullData: ScreepsData;
     window.addEventListener("message", ({ data }) => {
