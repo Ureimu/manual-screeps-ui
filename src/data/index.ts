@@ -230,7 +230,8 @@ export const testData: OriginScreepsData = {
             },
             isFull: false,
             uncaughtErrorNum: 0
-        }
+        },
+        memoryString: "{}"
     },
     globalData: {
         creepGroups: {

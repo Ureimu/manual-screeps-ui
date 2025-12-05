@@ -9,6 +9,7 @@ export interface OriginScreepsData {
         gpl: LevelData;
         name: string;
         error: ErrorSegmentMemory;
+        memoryString: string;
     };
     shardData: {
         shardName: string;

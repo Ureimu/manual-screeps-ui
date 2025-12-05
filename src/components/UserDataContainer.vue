@@ -106,6 +106,16 @@
                     </div>
                 </el-col>
             </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <MemoryChart
+                        :id="`Memory`"
+                        :name="`Memory`"
+                        :visable="!!screepsData"
+                        :memoryString="screepsData?.userData.memoryString"
+                    />
+                </el-col>
+            </el-row>
             <ErrorMemoryDialog title="报错信息" :errorMemory="screepsData?.userData.error" />
         </el-main>
     </el-container>
@@ -118,6 +128,7 @@ import DashboardProgressBar from "./DashboardProgress.vue";
 import FlexibleLineChart from "./echarts/FlexibleLineChart.vue";
 import ErrorMemoryDialog from "./ErrorMemoryDialog.vue";
 import TextContainer from "./TextContainer.vue";
+import MemoryChart from "./echarts/MemoryChart.vue";
 
 @Options({
     props: {
@@ -127,7 +138,8 @@ import TextContainer from "./TextContainer.vue";
         DashboardProgressBar,
         TextContainer,
         ErrorMemoryDialog,
-        FlexibleLineChart
+        FlexibleLineChart,
+        MemoryChart
     }
 })
 export default class UserDataContainer extends Vue {
