@@ -1,8 +1,14 @@
 <template>
     <el-button type="primary" align="left" @click="dialogTableVisible = true">Memory内存分布图</el-button>
 
-    <el-dialog title="Memory Profiler Dialog" :fullscreen="true" v-model="dialogTableVisible" @opened="runRender()">
-        <div :id="id + time + random" style="height: 800px; width: 1800px; margin: 0 auto"></div>
+    <el-dialog
+        title="Memory Profiler Dialog"
+        :fullscreen="true"
+        v-model="dialogTableVisible"
+        @opened="runRender()"
+        @closed="close()"
+    >
+        <div :id="id + time + random" style="height: 800px; width: 1800px; margin: 0 auto; overflow: hidden;"></div>
     </el-dialog>
 </template>
 
@@ -53,6 +59,7 @@ export default class MemoryChartDialog extends Vue {
         this.hasMounted = true;
     }
     runRender(): void {
+        document.body.style.overflow = "hidden";
         let chartDom = document.getElementById(this.id + this.time + this.random);
         if (!chartDom) return;
         console.log(`${this.id} start render multi line chart`);
@@ -258,6 +265,9 @@ export default class MemoryChartDialog extends Vue {
         return `${dateData.y}-${addZero(dateData.m)}-${addZero(dateData.d)},${addZero(dateData.h)}:${addZero(
             dateData.min
         )}:${addZero(dateData.s)}`;
+    }
+    close() {
+        document.body.style.overflow = "";
     }
 }
 </script>
